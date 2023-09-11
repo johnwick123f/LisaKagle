@@ -172,7 +172,7 @@ examples = [
     ],
     [
         "What can make the woman stand higher? Please output segmentation mask and explain why.",
-        "/kaggle/working/LisaKagle/imgs/example3.jpg",
+        "/kaggle/working/LisaKagle/imgs/example2.jpg",
     ],
 ]
 output_labels = ["Segmentation Output"]
