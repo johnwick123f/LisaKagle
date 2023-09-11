@@ -308,7 +308,7 @@ def inference(input_str, input_image):
         output_image = save_img  # input_image
     else:
         ## no seg output
-        output_image = cv2.imread("./resources/no_seg_out.png")[:, :, ::-1]
+        output_image = cv2.imread("/kaggle/working/LisaKagle/imgs/example1.jpg")[:, :, ::-1]
     return output_image, output_str
 
 
