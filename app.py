@@ -138,7 +138,7 @@ elif (
 
     model_engine = deepspeed.init_inference(
         model=model,
-        dtype=torch.half,
+        dtype=torch.bfloat16,
         replace_with_kernel_inject=True,
         replace_method="auto",
     )
@@ -252,7 +252,7 @@ def inference(input_str, input_image):
     elif args.precision == "fp16":
         image_clip = image_clip.half()
     else:
-        image_clip = image_clip.float()
+        image_clip = image_clip.bfloat16()
 
     image = transform.apply_image(image_np)
     resize_list = [image.shape[:2]]
@@ -267,7 +267,7 @@ def inference(input_str, input_image):
     elif args.precision == "fp16":
         image = image.half()
     else:
-        image = image.float()
+        image = image.bfloat16()
 
 
     input_ids = tokenizer_image_token(prompt, tokenizer, return_tensors="pt")
