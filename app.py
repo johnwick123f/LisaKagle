@@ -91,12 +91,12 @@ kwargs = {"torch_dtype": torch_dtype}
 if args.load_in_4bit:
     kwargs.update(
         {
-            "torch_dtype": torch.half,
+            "torch_dtype": torch.bfloat16,
             "device_map": "auto",
             "load_in_4bit": True,
             "quantization_config": BitsAndBytesConfig(
                 load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_compute_dtype=torch.bfloat16,
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_quant_type="nf4",
                 llm_int8_skip_modules=["visual_model"],
@@ -116,7 +116,7 @@ elif args.load_in_8bit:
     )
 
 model = LISAForCausalLM.from_pretrained(
-    args.version, low_cpu_mem_usage=True, seg_token_idx=args.seg_token_idx, **kwargs
+    "/kaggle/working/LISAMODEL", low_cpu_mem_usage=True, seg_token_idx=args.seg_token_idx, **kwargs
 )
 
 model.config.eos_token_id = tokenizer.eos_token_id
@@ -160,19 +160,19 @@ model.eval()
 examples = [
     [
         "Where can the driver see the car speed in this image? Please output segmentation mask.",
-        "./resources/imgs/example1.jpg",
+        "/kaggle/working/LISAKaggle/imgs/example1.jpg",
     ],
     [
         "Can you segment the food that tastes spicy and hot?",
-        "./resources/imgs/example2.jpg",
+        "/kaggle/working/LISAKaggle/imgs/example2.jpg",
     ],
     [
         "Assuming you are an autonomous driving robot, what part of the diagram would you manipulate to control the direction of travel? Please output segmentation mask and explain why.",
-        "./resources/imgs/example1.jpg",
+        "/kaggle/working/LISAKaggle/imgs/example1.jpg",
     ],
     [
         "What can make the woman stand higher? Please output segmentation mask and explain why.",
-        "./resources/imgs/example3.jpg",
+        "/kaggle/working/LISAKaggle/imgs/example3.jpg",
     ],
 ]
 output_labels = ["Segmentation Output"]
