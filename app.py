@@ -81,7 +81,7 @@ tokenizer = AutoTokenizer.from_pretrained(
 tokenizer.pad_token = tokenizer.unk_token
 args.seg_token_idx = tokenizer("[SEG]", add_special_tokens=False).input_ids[0]
 
-torch_dtype = torch.float32
+torch_dtype = torch.bfloat16
 if args.precision == "bf16":
     torch_dtype = torch.bfloat16
 elif args.precision == "fp16":
